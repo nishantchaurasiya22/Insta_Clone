@@ -6,8 +6,6 @@ def register_user(user_name:str,email:str,password:str,bio:str|None=None,file_by
     profile_image=None
     if file_bytes:
         safe_file_name=f"{user_name}_profile.jpg"
-        print("DEBUG file_name:",repr(safe_file_name))
-        print("DEBUG file_bytes length:",len(file_bytes))
         profile_image=upload_image(file_bytes,safe_file_name,folder="/profile_images")
     return create_user(user_name,email,hashed_password,bio,profile_image)
 

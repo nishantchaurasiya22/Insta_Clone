@@ -1,7 +1,7 @@
 from app.db import get_connection,release_connection
 from psycopg2.extras import RealDictCursor
 
-def create_user(user_name:str,email:str,hashed_password:str,bio:str|None=None,profile_image:str|None=None):
+def create_user(user_name:str,email:str,hashed_password:str,bio:str|None=None,profile_image:str|None=None)->dict:
     conn=get_connection()
     cur=conn.cursor(cursor_factory=RealDictCursor)
     try:
