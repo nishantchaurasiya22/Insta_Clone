@@ -10,7 +10,7 @@ async def register(
     user_name:str=Form(...),
     email:str=Form(...),
     password:str=Form(...),
-    bio:str=Form(...),
+    bio:str|None=Form(default=None),
     file:UploadFile|None=File(None)
 ):
     file_bytes=None

@@ -1,5 +1,6 @@
 from pydantic import BaseModel
-class ResponseUser(BaseModel):
+class ResponsePost(BaseModel):
     id:int
     caption:str
     image_url:str
+
