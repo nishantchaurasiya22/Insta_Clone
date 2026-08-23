@@ -1,4 +1,4 @@
-from app.repositories.post_repository import create_post,get_all_posts,get_one_post
+from app.repositories.post_repository import create_post,get_all_posts,get_one_post,delete_post
 from app.utils.imagekit_client import upload_image
 from uuid import uuid4
 
@@ -15,3 +15,5 @@ def get_all_posts_service(user_id:int)->list:
 def get_one_post_service(task_id:int,user_id:int)->dict:
     return get_one_post(task_id,user_id)
 
+def delete_post_service(task_id:int,user_id:int)->dict:
+    return delete_post(task_id,user_id)
