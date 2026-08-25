@@ -13,3 +13,4 @@ def upload_image(file_bytes: bytes, file_name: str, folder: str) -> str:
         use_unique_file_name=True
     )
     return response.url
+

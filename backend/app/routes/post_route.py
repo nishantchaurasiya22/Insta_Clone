@@ -5,7 +5,6 @@ from app.dependencies import get_current_user
 from app.dtos.post import ResponsePost
 post_router = APIRouter(prefix="/posts", tags=["posts"])
 
-
 @post_router.post("/create_post",response_model=ResponsePost,status_code=status.HTTP_201_CREATED)
 async def create_post(
     caption: str | None = Form(default=None),
