@@ -1,7 +1,7 @@
 from fastapi import APIRouter,status,HTTPException,Depends
 from app.services.follow_service import send_follow_request_service,accept_follow_request_service,reject_follow_request_service,unfollow_follow_request_service,get_followers_service,get_following_service,get_pending_service
 from app.dependencies import get_current_user
-from app.dtos.follow import ResponseFollow 
+from app.dtos.follow import ResponseFollow,ResponseUserList
 from typing import List
 import psycopg2
 follow_router=APIRouter(prefix="/follow",tags=["follow"])
@@ -42,17 +42,17 @@ def unfollow_request(following_id:int,current_user:dict=Depends(get_current_user
     except ValueError as e:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=str(e))
 
-@follow_router.get("/followers",status_code=status.HTTP_200_OK)
+@follow_router.get("/followers",response_model=List[ResponseUserList],status_code=status.HTTP_200_OK)
 def followers(current_user:dict=Depends(get_current_user)):
     user_id=int(current_user["sub"])
     return get_followers_service(user_id)
 
-@follow_router.get("/following",status_code=status.HTTP_200_OK)
+@follow_router.get("/following",response_model=List[ResponseUserList],status_code=status.HTTP_200_OK)
 def following(current_user:dict=Depends(get_current_user)):
     user_id=int(current_user["sub"])
     return get_following_service(user_id)
 
-@follow_router.get("/request/pending",status_code=status.HTTP_200_OK)
+@follow_router.get("/request/pending",response_model=List[ResponseUserList],status_code=status.HTTP_200_OK)
 def pending_request(current_user:dict=Depends(get_current_user)):
     user_id=int(current_user["sub"])
     return get_pending_service(user_id)

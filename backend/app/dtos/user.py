@@ -1,7 +1,6 @@
 from pydantic import BaseModel,EmailStr
 from typing import Optional
 
-
 class ResponseUser(BaseModel):
     id:int
     user_name:str
