@@ -1,0 +1,17 @@
+@font-face {
+  font-family: myFont;
+  src: url(../assets/-pkMfchyeAZ.woff2); 
+}
+*{
+    padding: 0;
+    margin: 0;
+    font-family: myFont;
+    box-sizing: border-box;
+}
+html,body,#root{
+    width: 100%;
+    min-height: 100vh;
+    background-color: #222222;
+    color: rgb(222, 221, 221);
+}
+
