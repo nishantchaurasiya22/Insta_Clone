@@ -8,20 +8,17 @@ main {
     .auth-section {
         margin: 1rem;
         display: flex;
-      
         flex-direction: column;
         gap: 1rem;
         padding: 1.5rem;
         background-color: #1c28305c;
         overflow: hidden;
         box-shadow: rgba(0, 0, 0, 0.616) 0px 3px 8px;
-        height: fit-content;
         border-radius: 1rem;
 
         .auth-title {
             font-size: 1.5rem;
             text-align: center;
-
         }
 
         .auth-form-section {
@@ -31,7 +28,7 @@ main {
             flex-direction: column;
             gap: 1rem;
 
-            button{
+            button {
                 background-color: rgba(19, 19, 215, 0.314);
                 outline: none;
                 border: none;
@@ -39,36 +36,58 @@ main {
                 color: blue;
                 border-radius: 100px;
                 cursor: pointer;
+                transition: 0.4s ease all;
             }
-            .input-section{
+            button:hover{
+                background-color: blue;
+                color: white;
+            }
+
+            .input-section {
                 display: flex;
+                align-items: center;
                 border: 1px solid #bbbcbd58;
                 padding: 0.3rem 0.5rem;
                 gap: 1rem;
-                font-size: 1.3rem;
+                font-size: 1rem;
 
-                input{
+                input {
                     border: none;
                     outline: none;
                     color: #BBBCBD;
                     background-color: transparent;
+                    width: 100%;
+                    font-size: 1rem;
                 }
 
+                textarea {
+                    border: none;
+                    outline: none;
+                    color: #BBBCBD;
+                    background-color: transparent;
+                    resize:None;
+                    width: 100%;
+                }
             }
-            
+
+            .textarea-section {
+                
+                padding-top: 0.5rem;
+            }
+
+         
         }
 
-        .auth-form-link{
-            p{
+        .auth-form-link {
+            p {
                 text-align: center;
                 font-size: 1rem;
 
-                .link{
+                .link {
                     text-decoration: none;
                     color: blue;
                 }
             }
         }
     }
-
 }
