@@ -1,23 +1,16 @@
-from fastapi import APIRouter,status,HTTPException,Response,Depends,UploadFile,File,Form
+from fastapi import APIRouter,status,HTTPException,Response,Depends
 import psycopg2
 from app.dependencies import get_current_user
 from app.services.user_service import register_user,authenticate_user,get_user_profile
-from app.dtos.user import ResponseUser,LoginUser
+from app.dtos.user import ResponseUser,LoginUser,CreateUser
 auth_router=APIRouter(prefix="/auth" ,tags=["auth"])
 
 @auth_router.post("/register",response_model=ResponseUser,status_code=status.HTTP_201_CREATED)
 async def register(
-    user_name:str=Form(...),
-    email:str=Form(...),
-    password:str=Form(...),
-    bio:str|None=Form(default=None),
-    file:UploadFile|None=File(None)
+   user:CreateUser
 ):
-    file_bytes=None
-    if file:
-        file_bytes=await file.read()
     try:
-        return register_user(user_name,email,password,bio,file_bytes)
+        return register_user(user.user_name,user.email,user.password)
     except psycopg2.errors.UniqueViolation:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT,detail="User already exist")
 
