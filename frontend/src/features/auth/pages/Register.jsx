@@ -4,27 +4,26 @@ import { IoIosContact } from "react-icons/io";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { Link } from "react-router";
 import { useState } from "react";
-import axios from "axios";
+
+import { registerAPI } from "../services/auth.api";
 const Register = () => {
  const[userName,SetUserName]=useState("")
  const[email,SetEmail]=useState("")
  const[password,SetPassword]=useState("")
+ const[err,setErr]=useState("")
+ const[loading,setLoading]=useState(false)
 
  const handleFormSubmit=async(e)=>{
   e.preventDefault()
-
-  try {
-    const response = await axios.post("http://127.0.0.1:8000/auth/register", {
-      user_name: userName,
-      email: email,
-      password: password
-    },{
-      withCredentials:true
-    })
-    console.log("Registered:", response.data)
-  } catch (error) {
-    console.error("Registration failed:", error.response?.data || error.message)
-  }
+  setLoading(true)
+ try{
+  const res=await registerAPI(userName,email,password)
+  console.log(res);
+ }catch(err){
+  setErr(err.response?.data?.message || "Registration failed")
+ }finally{
+  setLoading(false)
+ }
  }
   return (
     <main>

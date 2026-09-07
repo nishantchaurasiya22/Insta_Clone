@@ -3,23 +3,27 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { IoIosContact } from "react-icons/io";
 import { Link } from "react-router";
 import { useState } from "react";
-import axios from "axios";
+
+import { loginAPI } from "../services/auth.api";
 const Login = () => {
   const[identifier,SetIdentifier]=useState("")
   const[password,SetPassword]=useState("")
+  const[err,setErr]=useState("")
+  const[loading,setLoading]=useState(false)
   const handleFormSubmit=async(e)=>{
     e.preventDefault()
+    setLoading(true)
     try{
-      const response=await axios.post("http://127.0.0.1:8000/auth/login",{
-        identifier,
-        password
-      },{
-        withCredentials:true
-      })
-       console.log("login:", response)
-    }catch (error) {
-    console.error("login failed:", error.response?.data || error.message)
-  }}
+      const res=await loginAPI(identifier,password)
+      console.log(res);
+      
+    }catch(err){
+      setErr(err?.response?.data?.message||"Login failed")
+    }finally{
+      setLoading(false)
+    }
+    
+  }
   return (
   <main>
       <div className='auth-section'>
