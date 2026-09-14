@@ -2,45 +2,54 @@ import "../styles/form.scss"
 import { RiLockPasswordFill } from "react-icons/ri";
 import { IoIosContact } from "react-icons/io";
 import { MdOutlineAlternateEmail } from "react-icons/md";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { useAuth } from "../hooks/useAuth";
 import { useState } from "react";
-
-import { registerAPI } from "../services/auth.api";
 const Register = () => {
- const[userName,SetUserName]=useState("")
- const[email,SetEmail]=useState("")
- const[password,SetPassword]=useState("")
- const[err,setErr]=useState("")
- const[loading,setLoading]=useState(false)
+  const [userName, SetUserName] = useState("")
+  const [email, SetEmail] = useState("")
+  const [password, SetPassword] = useState("")
+  const navigate = useNavigate()
+  const { user, loading, handleRegister } = useAuth()
+  const handleFormSubmit = async (e) => {
+    e.preventDefault()
+    await handleRegister({
+      user_name: userName,
+      email: email,
+      password: password
 
- const handleFormSubmit=async(e)=>{
-  e.preventDefault()
-  setLoading(true)
- try{
-  const res=await registerAPI(userName,email,password)
-  console.log(res);
- }catch(err){
-  setErr(err.response?.data?.message || "Registration failed")
- }finally{
-  setLoading(false)
- }
- }
+  })
+    SetUserName("")
+    SetEmail("")
+    SetPassword("")
+    navigate("/")
+  }
+
+  if(loading){
+    return(
+      <main>
+        <h1>Loading</h1>
+      </main>
+    )
+  }
+
+
   return (
     <main>
       <div className='auth-section'>
         <h1 className='auth-title'>Register</h1>
-        <form onSubmit={(e)=>handleFormSubmit(e)} className='auth-form-section'>
+        <form onSubmit={(e) => handleFormSubmit(e)} className='auth-form-section'>
           <div className="input-section">
             <IoIosContact />
-            <input onChange={e=>SetUserName(e.target.value)} type="text" placeholder='username' />
+            <input value={userName} onChange={e => SetUserName(e.target.value)} type="text" placeholder='username' />
           </div>
-           <div className="input-section">
+          <div className="input-section">
             <MdOutlineAlternateEmail />
-            <input onChange={e=>SetEmail(e.target.value)} type="email" placeholder='Email' />
+            <input value={email} onChange={e => SetEmail(e.target.value)} type="email" placeholder='Email' />
           </div>
           <div className="input-section">
             <RiLockPasswordFill />
-            <input onChange={e=>SetPassword(e.target.value)} type="password" placeholder='Password' />
+            <input value={password} onChange={e => SetPassword(e.target.value)} type="password" placeholder='Password' />
           </div>
           <button type="submit">Register</button>
         </form>
@@ -48,7 +57,7 @@ const Register = () => {
           <p>have an account? <Link className="link" to="/">Login</Link> </p>
         </div>
       </div>
-    </main> 
+    </main>
   )
 }
 

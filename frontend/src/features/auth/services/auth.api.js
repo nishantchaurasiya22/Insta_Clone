@@ -9,13 +9,20 @@ export const registerAPI = async (userName, email, password) => {
         return res.data
 
     } catch (err) {
-        console.error("Register failed:", err.response?.data || err.message)
-        throw err
+        const status = err.response.status
 
+        if (status === 409) {
+            console.log("Email or username already exists")
+        }
+        if (status === 422) {
+            console.log("Please enter valid details")
+        }
     }
+
 }
 
-export const loginAPI = async(identifier, password) => {
+
+export const loginAPI = async (identifier, password) => {
     try {
         const res = await axiosInstance.post("/login", {
             identifier,
@@ -24,19 +31,31 @@ export const loginAPI = async(identifier, password) => {
         return res
 
     } catch (err) {
-         console.error("Login failed:", err.response?.data || err.message)
-        throw err
+        const status = err.response.status
+
+        if (status === 401) {
+            console.log("Invalid email/phone or password")
+        }
+        if (status === 422) {
+            console.log("Please enter valid details")
+        }
+        
 
     }
 }
 
-export const checkAuthAPI =async() => {
+export const checkAuthAPI = async () => {
     try {
         const res = await axiosInstance.get("/me")
-        return res.data
+        console.log(res.data);
+        
 
     } catch (err) {
-        throw err
+        const status = err.response?.status
+         if (status === 401) {
+            console.log("Login required");
+        }
+
     }
 }
 

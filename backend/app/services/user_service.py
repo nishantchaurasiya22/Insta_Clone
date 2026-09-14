@@ -14,7 +14,7 @@ def authenticate_user(identifier:str,password:str)->dict:
     access_token=create_access_token({
         "user_id":user["id"]
     })
-    return access_token
+    return access_token,user
 
 def get_user_profile(user_id:int):
     user=get_user(user_id)

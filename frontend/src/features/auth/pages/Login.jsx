@@ -1,28 +1,32 @@
 import "../styles/form.scss"
 import { RiLockPasswordFill } from "react-icons/ri";
 import { IoIosContact } from "react-icons/io";
-import { Link } from "react-router";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router";
 
-import { loginAPI } from "../services/auth.api";
+import { useState } from "react";
+import {useAuth} from "../hooks/useAuth"
 const Login = () => {
+  const{loading,user,handleLogin}=useAuth()
   const[identifier,SetIdentifier]=useState("")
+  const navigate=useNavigate()
   const[password,SetPassword]=useState("")
-  const[err,setErr]=useState("")
-  const[loading,setLoading]=useState(false)
   const handleFormSubmit=async(e)=>{
     e.preventDefault()
-    setLoading(true)
-    try{
-      const res=await loginAPI(identifier,password)
-      console.log(res);
-      
-    }catch(err){
-      setErr(err?.response?.data?.message||"Login failed")
-    }finally{
-      setLoading(false)
-    }
-    
+    await handleLogin(
+      identifier,
+      password
+    )
+    SetIdentifier("")
+    SetPassword("")
+    navigate("/home")
+  }
+
+  if(loading){
+    return(
+      <main>
+        <h1>Loading...</h1>
+      </main>
+    )
   }
   return (
   <main>
@@ -31,11 +35,11 @@ const Login = () => {
       <form onSubmit={(e)=>handleFormSubmit(e)} className='auth-form-section'>
        <div className="input-section">
         <IoIosContact />
-         <input onChange={e=>SetIdentifier(e.target.value)} type="text" placeholder='Email or Phone' />
+         <input value={identifier} onChange={e=>SetIdentifier(e.target.value)} type="text" placeholder='Email or Phone' />
        </div>
         <div className="input-section">
           <RiLockPasswordFill />
-          <input onChange={e=>SetPassword(e.target.value)} type="password" placeholder='Password'/>
+          <input value={password} onChange={e=>SetPassword(e.target.value)} type="password" placeholder='Password'/>
         </div>
         <button type="submit">Login</button>
       </form>

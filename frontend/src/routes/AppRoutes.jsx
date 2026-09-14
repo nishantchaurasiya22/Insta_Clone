@@ -5,36 +5,37 @@ import Register from "../features/auth/pages/Register"
 import HomeLayOut from "../features/home/layouts/HomeLayOut"
 import Home from "../features/home/pages/Home"
 
+
 const AppRoutes = () => {
-    const router=createBrowserRouter([
+    const router = createBrowserRouter([
         {
-            path:"/",
-            element:<AuthLayOut/>,
-            children:([
+            path: "/",
+            element: <AuthLayOut />,
+            children: ([
                 {
-                    index:true,
-                    element:<Login/>
+                    index: true,
+                    element: <Login />
                 },
                 {
-                    path:"register",
-                    element:<Register/>
+                    path: "register",
+                    element: <Register />
                 }
             ])
         },
         {
-            path:"/home",
-            element:<HomeLayOut/>,
-            children:[
+            path: "/home",
+            element: <HomeLayOut />,
+            children: [
                 {
-                 index:true,
-                 element:<Home/>
+                    index: true,
+                    element: <Home />
                 }
             ]
         }
     ])
-  return (
-    <RouterProvider router={router} />
-  )
+    return (
+        <RouterProvider router={router} />
+    )
 }
 
 export default AppRoutes

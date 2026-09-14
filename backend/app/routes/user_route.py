@@ -14,10 +14,10 @@ async def register(
     except psycopg2.errors.UniqueViolation:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT,detail="User already exist")
 
-@auth_router.post("/login",status_code=status.HTTP_200_OK)
+@auth_router.post("/login",response_model=ResponseUser,status_code=status.HTTP_200_OK)
 def login(user:LoginUser,response:Response):
     try:
-        access_token=authenticate_user(user.identifier,user.password)
+        access_token,user_data=authenticate_user(user.identifier,user.password)
         response.set_cookie(
             key="access_token",
             value=access_token,
@@ -25,7 +25,7 @@ def login(user:LoginUser,response:Response):
             secure=False,
             samesite="lax"
         )
-        return "Login successfully"
+        return user_data
     except ValueError as e:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail="Unauthorized user")
     
