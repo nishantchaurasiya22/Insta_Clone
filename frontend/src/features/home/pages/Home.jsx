@@ -1,14 +1,12 @@
 import { useAuth } from "../../auth/hooks/useAuth"
-
+import HeaderComp from "../components/HeaderComp"
+import "../styles/home.scss"
 
 const Home = () => {
   const { user } = useAuth()
-
-  
   return (
-    <main>
-     <h1>{user?.user_name}</h1>
-     <img src={user?.profile_image} alt="profile_image" />
+    <main className="home-section">
+      <HeaderComp />
     </main>
   )
 }

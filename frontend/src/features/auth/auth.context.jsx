@@ -4,7 +4,7 @@ import { checkAuthAPI } from "./services/auth.api"
 export const AuthContext=createContext()
 export const AuthProvider=({children})=>{
     const[user,SetUser]=useState(null)
-    const[loading,SetLoading]=useState(false)
+    const[loading,SetLoading]=useState(true)
    useEffect(() => {
     const verifyUser = async () => {
         try {
