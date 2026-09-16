@@ -13,16 +13,21 @@ const Register = () => {
   const { user, loading, handleRegister } = useAuth()
   const handleFormSubmit = async (e) => {
     e.preventDefault()
-    await handleRegister({
+    const result=await handleRegister({
       user_name: userName,
       email: email,
       password: password
 
   })
-    SetUserName("")
-    SetEmail("")
-    SetPassword("")
-    navigate("/")
+
+    if (result.success) {
+      navigate("/")
+      SetUserName("")
+      SetEmail("")
+      SetPassword("")
+   
+    }
+
   }
 
   if(loading){

@@ -1,8 +1,15 @@
-import React from 'react'
+import { useAuth } from "../../auth/hooks/useAuth"
+
 
 const Home = () => {
+  const { user } = useAuth()
+
+  
   return (
-    <div>Home</div>
+    <main>
+     <h1>{user?.user_name}</h1>
+     <img src={user?.profile_image} alt="profile_image" />
+    </main>
   )
 }
 

@@ -1,5 +1,6 @@
 from app.db import get_connection,release_connection
 from psycopg2.extras import RealDictCursor
+from app.config import settings
 
 def create_user(user_name:str,email:str,hashed_password:str)->dict:
     conn=get_connection()
@@ -7,11 +8,11 @@ def create_user(user_name:str,email:str,hashed_password:str)->dict:
     try:
         cur.execute(
             """
-             INSERT INTO users(user_name,email,hashed_password)
-             VALUES(%s,%s,%s)
+             INSERT INTO users(user_name,email,hashed_password,bio,profile_image)
+             VALUES(%s,%s,%s,%s,%s)
              RETURNING id,user_name,email,bio,profile_image
             """,
-            (user_name,email,hashed_password)
+            (user_name,email,hashed_password,"",settings.DEFAULT_PROFILE_IMAGE)
         )
         user=cur.fetchone()
         conn.commit()

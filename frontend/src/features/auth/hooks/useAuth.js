@@ -1,25 +1,37 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../auth.context";
-import { loginAPI, registerAPI, checkAuthAPI } from "../services/auth.api"
+import { loginAPI, registerAPI } from "../services/auth.api"
 
 export const useAuth = () => {
     const context = useContext(AuthContext)
     const { user, SetUser, loading, SetLoading } = context
 
-
     const handleLogin = async (identifier, password) => {
         SetLoading(true)
-        const response = await loginAPI(identifier, password)
-        SetUser(response?.data)
-      
-        SetLoading(false)
+        try {
+            const response = await loginAPI(identifier, password)
+            SetUser(response)
+            return { success: true }       
+        } catch (error) {
+            SetUser(null)
+            return { success: false, error } 
+        } finally {
+            SetLoading(false)
+        }
     }
 
     const handleRegister = async ({ user_name, email, password }) => {
         SetLoading(true)
-        const response = await registerAPI(user_name, email, password)
-        SetUser(response.user)
-        SetLoading(false)
+        try {
+            const response = await registerAPI(user_name, email, password)
+            SetUser(response)
+            return { success: true }
+        } catch (error) {
+            SetUser(null)
+            return { success: false, error }
+        } finally {
+            SetLoading(false)
+        }
     }
 
     return {

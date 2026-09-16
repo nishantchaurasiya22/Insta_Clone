@@ -10,5 +10,6 @@ class Settings(BaseSettings):
     ALGORITHM:str
     ACCESS_TOKEN_EXPIRE_MINUTES:int
     IMAGEKIT_PRIVATE_KEY:str
+    DEFAULT_PROFILE_IMAGE:str
 settings=Settings()
 

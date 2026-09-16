@@ -4,6 +4,7 @@ import Login from "../features/auth/pages/Login"
 import Register from "../features/auth/pages/Register"
 import HomeLayOut from "../features/home/layouts/HomeLayOut"
 import Home from "../features/home/pages/Home"
+import ProtectedRoute from "./ProtectedRoutes"
 
 
 const AppRoutes = () => {
@@ -24,11 +25,16 @@ const AppRoutes = () => {
         },
         {
             path: "/home",
-            element: <HomeLayOut />,
+            element:<ProtectedRoute/>,
             children: [
                 {
-                    index: true,
-                    element: <Home />
+                    element: <HomeLayOut/>,
+                    children:[
+                        {
+                            index:true,
+                            element:<Home/>
+                        }
+                    ]
                 }
             ]
         }

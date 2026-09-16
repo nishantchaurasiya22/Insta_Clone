@@ -6,6 +6,7 @@ export const registerAPI = async (userName, email, password) => {
             email: email,
             password: password
         })
+        
         return res.data
 
     } catch (err) {
@@ -17,8 +18,9 @@ export const registerAPI = async (userName, email, password) => {
         if (status === 422) {
             console.log("Please enter valid details")
         }
+        throw err 
     }
-
+     
 }
 
 
@@ -28,7 +30,8 @@ export const loginAPI = async (identifier, password) => {
             identifier,
             password
         })
-        return res
+      
+        return res.data
 
     } catch (err) {
         const status = err.response.status
@@ -40,14 +43,15 @@ export const loginAPI = async (identifier, password) => {
             console.log("Please enter valid details")
         }
         
-
+ throw err 
     }
+     
 }
 
 export const checkAuthAPI = async () => {
     try {
         const res = await axiosInstance.get("/me")
-        console.log(res.data);
+        return(res.data);
         
 
     } catch (err) {
@@ -55,8 +59,9 @@ export const checkAuthAPI = async () => {
          if (status === 401) {
             console.log("Login required");
         }
-
+throw err 
     }
+      
 }
 
 
