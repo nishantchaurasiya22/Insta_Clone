@@ -9,11 +9,8 @@ export const AuthProvider=({children})=>{
     const verifyUser = async () => {
         try {
             const response = await checkAuthAPI()
-          
             SetUser(response)
-          
         } catch (error) {
-            console.log("checkAuth failed:", error)  
             SetUser(null)
         } finally {
             SetLoading(false)

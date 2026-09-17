@@ -1,6 +1,16 @@
-.home-section{
+.home-section {
     width: 100%;
-    min-height: 100vh;
-    position: relative;
-    
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .content-section {
+        width: 60%;
+        display: flex;
+        background-color: #1F1F22;
+        margin:50px 0 10px 0;
+        box-shadow: rgb(0, 0, 0) 0px 10px 10px -5px;
+        padding: 1rem;
+        border-radius: 1rem;
+    }
 }

@@ -80,3 +80,25 @@ def delete_post(task_id:int,user_id:int)->Optional[bool]:
     finally:
         cur.close()
         release_connection(conn)
+
+def feed(user_id:int)->list:
+    print("DEBUG: user_id received in feed():", user_id)  
+    conn=get_connection()
+    cur=conn.cursor(cursor_factory=RealDictCursor)
+    try:
+        cur.execute(
+            """
+             SELECT posts.id,posts.caption,posts.image_url,
+             users.user_name
+             FROM posts
+             JOIN users ON users.id =posts.user_id
+             WHERE posts.user_id !=%s
+             ORDER BY posts.id DESC
+            """,
+            (user_id,)
+        )
+        result=cur.fetchall()
+        return result
+    finally:
+        cur.close()
+        release_connection(conn)

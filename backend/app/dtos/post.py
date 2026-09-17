@@ -4,3 +4,11 @@ class ResponsePost(BaseModel):
     caption:str
     image_url:str
 
+
+class ResponsePosts(BaseModel):
+    id:int
+    caption:str
+    image_url:str
+    user_name: str 
+
+

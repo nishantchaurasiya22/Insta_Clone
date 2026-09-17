@@ -5,7 +5,7 @@ import Register from "../features/auth/pages/Register"
 import HomeLayOut from "../features/home/layouts/HomeLayOut"
 import Home from "../features/home/pages/Home"
 import ProtectedRoute from "./ProtectedRoutes"
-
+import { PostsProvider } from "../features/posts/posts.context" 
 
 const AppRoutes = () => {
     const router = createBrowserRouter([
@@ -25,14 +25,18 @@ const AppRoutes = () => {
         },
         {
             path: "/home",
-            element:<ProtectedRoute/>,
+            element: <ProtectedRoute />,
             children: [
                 {
-                    element: <HomeLayOut/>,
-                    children:[
+                    element: (
+                        <PostsProvider>
+                            <HomeLayOut />
+                        </PostsProvider>
+                    ),
+                    children: [
                         {
-                            index:true,
-                            element:<Home/>
+                            index: true,
+                            element: <Home />
                         }
                     ]
                 }
