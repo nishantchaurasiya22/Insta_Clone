@@ -17,9 +17,6 @@ const Login = () => {
 
     if (result.success) {
       navigate("/home")
-      SetIdentifier("")
-      SetPassword("")
-      
     }
 
   }

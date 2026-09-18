@@ -3,6 +3,7 @@ class ResponsePost(BaseModel):
     id:int
     caption:str
     image_url:str
+    
 
 
 class ResponsePosts(BaseModel):
@@ -10,5 +11,6 @@ class ResponsePosts(BaseModel):
     caption:str
     image_url:str
     user_name: str 
+    profile_image:str
 
 
