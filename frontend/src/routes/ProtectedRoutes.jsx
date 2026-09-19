@@ -3,7 +3,7 @@ import { useAuth } from "../features/auth/hooks/useAuth"
 
 const ProtectedRoute = () => {
     const { user, loading } = useAuth()
-
+    
     if (loading) {
         return (
             <main>

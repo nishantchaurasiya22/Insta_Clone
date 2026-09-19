@@ -5,14 +5,17 @@ import Register from "../features/auth/pages/Register"
 import HomeLayOut from "../features/home/layouts/HomeLayOut"
 import Home from "../features/home/pages/Home"
 import ProtectedRoute from "./ProtectedRoutes"
-import { PostsProvider } from "../features/posts/posts.context" 
+import Feed from "../features/profile/components/Feed"
+import Profile from "../features/profile/components/Profile"
+import { ProfileProvider } from "../features/profile/profile.context"
+import CreatePost from "../features/profile/components/CreatePost"
 
 const AppRoutes = () => {
     const router = createBrowserRouter([
         {
             path: "/",
             element: <AuthLayOut />,
-            children: ([
+            children: [
                 {
                     index: true,
                     element: <Login />
@@ -21,22 +24,35 @@ const AppRoutes = () => {
                     path: "register",
                     element: <Register />
                 }
-            ])
+            ]
         },
         {
             path: "/home",
             element: <ProtectedRoute />,
             children: [
                 {
-                    element: (
-                        <PostsProvider>
-                            <HomeLayOut />
-                        </PostsProvider>
-                    ),
+                    element: <HomeLayOut />,
                     children: [
                         {
-                            index: true,
-                            element: <Home />
+                           
+                            element:
+                            <ProfileProvider>
+                               <Home/>
+                            </ProfileProvider>,
+                            children: [
+                                {
+                                    index: true,
+                                    element: <Feed/>
+                                },
+                                {
+                                    path: "profile",
+                                    element:<Profile/>
+                                },
+                                {
+                                    path:"create_post",
+                                    element:<CreatePost/>
+                                }
+                            ]
                         }
                     ]
                 }

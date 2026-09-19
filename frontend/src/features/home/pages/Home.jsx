@@ -1,19 +1,18 @@
-import { useAuth } from "../../auth/hooks/useAuth"
-import PostComp from "../../posts/components/PostComp"
-import HeaderComp from "../components/HeaderComp"
+import { Outlet } from "react-router"
+import Header from "../components/Header"
 import "../styles/home.scss"
-
-
+import SideBar from "../components/SideBar"
 const Home = () => {
-  const { user } = useAuth()
   return (
-    <main className="home-section">
-      <HeaderComp />
+    <div className="home">
+      <Header />
       <div className="content-section">
-        <PostComp/>
+        <SideBar/>
+        <div className="child">
+          <Outlet />
+        </div>
       </div>
-  
-    </main>
+    </div>
   )
 }
 

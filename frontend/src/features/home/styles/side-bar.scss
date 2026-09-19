@@ -1,0 +1,39 @@
+.side-bar{
+    position: sticky;
+    top: 15%;
+    height: 10%;
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding:2.5rem;
+   border-radius: 1rem;
+   background-color: #1f1f226d;
+  a {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: inherit;
+    border-radius:100px ;
+    background-color: #040303;
+    transition: background-color 0.3s ease;
+     div{
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+  
+        
+        span {
+            display: flex;
+            align-items: center;
+        }
+        
+       
+    }
+    
+    &.active {
+        background-color: rgb(16, 119, 144);
+       
+    }
+}
+}
+   
