@@ -22,7 +22,8 @@ const CreatePost = () => {
     <div className="create-post">
       <h2>Create Post</h2>
       <form onSubmit={handleSubmit}>
-        <input
+  
+          <input
           type="file"
           key={fileKey}
           accept="image/*"

@@ -19,8 +19,8 @@ const SideBar = () => {
       >
         <div><span><CgProfile /></span><span>Profile</span></div>
       </NavLink>
-      <NavLink to="/home/create_post" className={({isActive})=>isActive?"active":""} >
-            <div><span><CiCirclePlus /></span><span>create post</span></div>
+      <NavLink to="/home/create_post" className={({ isActive }) => isActive ? "active" : ""} >
+        <div><span><CiCirclePlus /></span><span>create post</span></div>
       </NavLink>
     </div>
   )

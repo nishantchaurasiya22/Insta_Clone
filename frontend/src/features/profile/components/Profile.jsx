@@ -1,11 +1,8 @@
 
 
 const Profile = () => {
-  
   return (
-    <div>
-     fewf
-    </div>
+    <div>Profile</div>
   )
 }
 

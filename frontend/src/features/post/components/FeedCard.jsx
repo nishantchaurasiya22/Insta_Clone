@@ -1,11 +1,11 @@
 import { CiHeart } from "react-icons/ci";
-import "../styles/profile-card.scss"
-const ProfileCard = ({ profile }) => {
-    const { user_name, caption, profile_image, image_url } = profile
+import "../styles/feed-card.scss"
+const FeedCard = ({feedCardDetail}) => {
+    const { user_name, caption, profile_image, image_url } = feedCardDetail
     return (
-        <div className='profile-card'>
-            <div className="profile-card-top">
-                <div className="profile-info">
+        <div className="feed-card">
+            <div className="feed-card-top">
+                <div className="feed-info">
                     <img src={profile_image} alt="profile_image" />
                     <h2>{user_name}</h2>
                 </div>
@@ -22,4 +22,4 @@ const ProfileCard = ({ profile }) => {
     )
 }
 
-export default ProfileCard
+export default FeedCard

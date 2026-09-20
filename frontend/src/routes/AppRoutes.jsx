@@ -5,10 +5,10 @@ import Register from "../features/auth/pages/Register"
 import HomeLayOut from "../features/home/layouts/HomeLayOut"
 import Home from "../features/home/pages/Home"
 import ProtectedRoute from "./ProtectedRoutes"
-import Feed from "../features/profile/components/Feed"
 import Profile from "../features/profile/components/Profile"
-import { ProfileProvider } from "../features/profile/profile.context"
-import CreatePost from "../features/profile/components/CreatePost"
+import CreatePost from "../features/post/components/CreatePost"
+import { PostProvider } from "../features/post/post.context"
+import Feed from "../features/post/components/Feed"
 
 const AppRoutes = () => {
     const router = createBrowserRouter([
@@ -36,9 +36,12 @@ const AppRoutes = () => {
                         {
                            
                             element:
-                            <ProfileProvider>
-                               <Home/>
-                            </ProfileProvider>,
+                            <PostProvider>
+                             <Home/>
+                            </PostProvider>
+                               
+                        
+                            ,
                             children: [
                                 {
                                     index: true,

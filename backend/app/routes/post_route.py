@@ -16,7 +16,8 @@ async def create_post(
         post = create_post_service(
             user_id=int(current_user["sub"]),
             caption=caption,
-            file_bytes=file_bytes
+            file_bytes=file_bytes,
+         
         )
     except ValueError as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))

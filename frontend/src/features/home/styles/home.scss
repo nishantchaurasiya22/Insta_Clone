@@ -14,9 +14,11 @@
 
         .child {
             flex: 1;
-              background-color: #1f1f2255;
+            display: flex;
+            justify-content: center;
+            background-color: #1f1f2255;
             padding: 1rem 2rem;
-            min-height: 100vh;
+            min-height: 90vh;
             overflow-y: auto;
             scroll-behavior: smooth;
         }
