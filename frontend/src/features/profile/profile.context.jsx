@@ -5,7 +5,7 @@ export const ProfileContext = createContext()
 export const ProfileProvider = ({ children }) => {
     const [feed, SetFeed] = useState(null)
     const [loading, SetLoading] = useState(true)
-    const[posts,SetPosts]=useState(null)
+    const[posts,SetPosts]=useState([])
     const[post,SetPost]=useState(null)
     const getFeed = async () => {
         try {

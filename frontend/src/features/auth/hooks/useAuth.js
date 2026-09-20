@@ -12,9 +12,8 @@ export const useAuth = () => {
             const response = await loginAPI(identifier, password)
             SetUser(response)
             return { success: true }       
-        } catch (error) {  
-             SetUser(null)      
-            return { success: false, error } 
+        } catch (err) {    
+            return { success: false, error:err } 
         } finally {
             SetLoading(false)
         }
@@ -26,9 +25,8 @@ export const useAuth = () => {
             const response = await registerAPI(user_name, email, password)
             SetUser(response)
             return { success: true }
-        } catch (error) {
-             SetUser(null)      
-            return { success: false, error }
+        } catch (err) {     
+            return { success: false, error:err }
         } finally {
             SetLoading(false)
         }
@@ -37,10 +35,10 @@ export const useAuth = () => {
     SetLoading(true)
     try {
         await logoutAPI()
-    } catch (error) {
-        console.log(error)
+    } catch (err) {
+        return{success:false,error:err}
     } finally {
-        SetUser(null)
+SetUser(null) 
         SetLoading(false)
     }
 }
