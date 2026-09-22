@@ -5,9 +5,8 @@ export const PostProvider = ({ children }) => {
     const [post, SetPost] = useState(null)
     const [posts, SetPosts] = useState([])
     const [feed,SetFeed]=useState([])
-    const[loading,SetLoading]=useState(true)
     return (
-    <PostContext.Provider value={{post,posts,loading,feed,SetPost,SetPosts,SetLoading,SetFeed}}>
+    <PostContext.Provider value={{post,posts,feed,SetPost,SetPosts,SetFeed}}>
         {children}
     </PostContext.Provider>)
 

@@ -10,3 +10,4 @@ class ResponseUserList(BaseModel):
     id:int
     user_name:str
     profile_image:str|None=None
+    user_id:int

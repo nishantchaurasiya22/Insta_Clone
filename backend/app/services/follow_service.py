@@ -1,4 +1,5 @@
 from app.repositories.follow_repository import send_follow_request,accept_follow_request,reject_follow_request,unfollow_follower_request,get_followers_request,get_following_request,get_pending_request
+
 def send_follow_request_service(follower_id:int,following_id:int)->dict:
     if follower_id==following_id:
         raise ValueError("You cannot follow yourself")
@@ -19,7 +20,7 @@ def reject_follow_request_service(follower_id:int,following_id:int)->dict:
 def unfollow_follow_request_service(follower_id:int,following_id:int)->dict:
     result=unfollow_follower_request(follower_id,following_id)
     if not result:
-        raise ValueError("The user you are trying to unfollow does not exist")
+        raise ValueError("You are not currently following this user")   # ✅ fixed
     return result
 
 def get_followers_service(user_id:int)->list[dict]:

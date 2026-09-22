@@ -9,6 +9,7 @@ import Profile from "../features/profile/components/Profile"
 import CreatePost from "../features/post/components/CreatePost"
 import { PostProvider } from "../features/post/post.context"
 import Feed from "../features/post/components/Feed"
+import {FollowProvider } from "../features/follow/follow.context"
 
 const AppRoutes = () => {
     const router = createBrowserRouter([
@@ -37,7 +38,9 @@ const AppRoutes = () => {
                            
                             element:
                             <PostProvider>
-                             <Home/>
+                           <FollowProvider>
+                            <Home/>
+                           </FollowProvider>
                             </PostProvider>
                                
                         

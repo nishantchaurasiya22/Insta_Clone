@@ -12,5 +12,6 @@ class ResponsePosts(BaseModel):
     image_url:str
     user_name: str 
     profile_image:str
+    user_id:int
 
 

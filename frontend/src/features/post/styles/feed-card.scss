@@ -18,9 +18,10 @@
        gap: 0.5rem;
        border-radius: 12px;
        align-items: center;
-       font-size: 0.5rem;
+       font-size: 1rem;
+
        img {
-         width: 30px;
+         width: 45px;
          border-radius: 50%;
        }
 
@@ -33,19 +34,21 @@
        background-color: #040303;
        padding: 0.5rem 2rem;
        border-radius: 100px;
-       transition: background-color 0.5s ease;
+       transition: background-color 0.6s ease;
 
-       button {
-         cursor: pointer;
-         background-color: transparent;
-         border: none;
-         outline: None;
-         color: white;
-         font-size: 1rem;
-       }
+       border: none;
+       outline: None;
+       color: white;
+       font-size: 1rem;
      }
-     .follow-btn:hover{
-      background-color: rgb(16, 119, 144);
+
+     .follow-btn:hover {
+       background-color: rgb(16, 119, 144);
+     }
+
+     .follow-btn:disabled {
+       background-color: gray;
+       cursor: not-allowed;
      }
    }
 
@@ -54,7 +57,7 @@
      width: 50%;
    }
 
-   span {
+   .likes {
      font-size: 2rem;
      cursor: pointer;
    }

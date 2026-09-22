@@ -6,7 +6,7 @@ export const getFeedAPI = async () => {
     } catch (err) {
         const status = err?.response?.status
         if (status === 500) {
-            console.log("Server erro");
+            console.log("Server error");
         }
         throw err
     }
@@ -20,7 +20,7 @@ export const createPostAPI = async (formData) => {
         if (status === 400) {
             console.log("Bad request:", err.response?.data?.detail);
         } if (status === 500) {
-            console.log("Server error");
+            console.log("Internal server error");
 
         }
         throw err

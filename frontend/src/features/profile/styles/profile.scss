@@ -1,0 +1,54 @@
+.profile {
+    width: 100%;
+    border-radius: 1rem;
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+    align-items: center;
+
+    .profile-card {
+        gap: 2rem;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        display: flex;
+        background-color: #1C1D20;
+        border-radius: 2rem;
+        padding: 2rem 3rem;
+
+        img {
+            flex-shrink: 0;
+            min-width: 100px;
+            max-width: 180px;
+            border-radius: 50%;
+        }
+
+        .profile-details {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 2rem;
+            text-align: center;
+
+            .follow-details {
+                display: flex;
+                gap: 2rem;
+                font-size: 2rem;
+
+            }
+
+            h2 {
+                font-size: 2.5rem;
+            }
+        }
+    }
+
+    .posts {
+        padding: 2rem;
+        gap: 2rem;
+        width: 100%;
+        display: flex;
+        justify-content:center;
+        flex-wrap: wrap;
+    }
+
+}

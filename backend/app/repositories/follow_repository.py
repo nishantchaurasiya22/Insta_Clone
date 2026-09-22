@@ -125,20 +125,29 @@ def get_following_request(user_id:int)->list[dict]:
         cur.close()
         release_connection(conn)
 
-def get_pending_request(user_id:int)->list[dict]:
-    conn=get_connection()
-    cur=conn.cursor(cursor_factory=RealDictCursor)
+def get_pending_request(user_id: int) -> list[dict]:
+
+    conn = get_connection()
+    cur = conn.cursor(cursor_factory=RealDictCursor)
+
     try:
         cur.execute(
             """
-            SELECT u.id,u.user_name,u.profile_image
+            SELECT
+                u.id,
+                u.id AS user_id,
+                u.user_name,
+                u.profile_image
             FROM follows f
-            JOIN users u ON u.id=f.follower_id
-            WHERE f.following_id=%s AND f.status='pending'
+            JOIN users u ON u.id = f.following_id
+            WHERE f.follower_id = %s
+            AND f.status = 'pending'
             """,
             (user_id,)
         )
+
         return cur.fetchall()
+
     finally:
         cur.close()
         release_connection(conn)

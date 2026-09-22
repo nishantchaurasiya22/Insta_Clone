@@ -3,7 +3,7 @@ import { usePost } from "../hooks/usePost";
 import "../styles/create-post.scss"
 const CreatePost = () => {
   const [caption, SetCaption] = useState("");
-  const { handleCreatePost } = usePost()
+  const { handleCreatePost} = usePost()
   const [fileKey, SetFileKey] = useState(0);
   const [file, SetFile] = useState(null);
 
@@ -20,7 +20,6 @@ const CreatePost = () => {
 
   return (
     <div className="create-post">
-      <h2>Create Post</h2>
       <form onSubmit={handleSubmit}>
   
           <input

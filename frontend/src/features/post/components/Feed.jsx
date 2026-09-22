@@ -5,7 +5,6 @@ import FeedCard from "./FeedCard"
 const Feed = () => {
   const{feed,handleFeed}=usePost()
 useEffect(() => {
-    console.log("Feed mounted, calling handleFeed");
     handleFeed()
 }, [])
   return (
