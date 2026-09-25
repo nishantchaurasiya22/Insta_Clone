@@ -1,18 +1,18 @@
 import { CiHeart } from "react-icons/ci";
 import "../styles/feed-card.scss"
-import { useFollow } from "../../follow/hooks/useFollow"
-import { useContext } from "react";
-import { FollowContext } from "../../follow/follow.context";
-const FeedCard = ({ feedCardDetail }) => {
+import useFollow from "../../follow/hooks/useFollow";
+
+const FeedCard = ({  feedCardDetail}) => {
     const { user_name, caption, profile_image, image_url, user_id } = feedCardDetail
-      const context=useContext(FollowContext)
-  const{SetSendRequest,SendRequest}=context
-    const { handleSendFollowRequest, pending } = useFollow()
-    const handleClick = () => {
+    const{handleSendFollowRequest,request}=useFollow()
+    const isRequested=request?.includes(user_id)
+
+    const handleFollow=()=>{
+        if(isRequested) return;
+        
         handleSendFollowRequest(user_id)
-        SetSendRequest(true)
     }
-    const isPending = pending.some(item => item.user_id == user_id)
+
     return (
         <div className="feed-card">
             <div className="feed-card-top">
@@ -21,7 +21,7 @@ const FeedCard = ({ feedCardDetail }) => {
                     <h2>{user_name}</h2>
                 </div>
 
-                <button className="follow-btn" onClick={handleClick}  disabled={isPending} >{isPending ? "requested" : "follow"}</button>
+                <button className="follow-btn" onClick={handleFollow} disabled={isRequested} >{isRequested?"Requested":"Follow"} </button>
 
             </div>
             <img src={image_url} />

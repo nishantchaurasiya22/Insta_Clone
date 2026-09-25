@@ -1,23 +1,32 @@
-import { useContext } from "react"
+import { useContext } from "react";
 import { FollowContext } from "../follow.context"
-import { sendFollowRequestAPI } from "../services/follow.api" 
+import { sendFollowRequest } from "../services/follow.api";
 
-export const useFollow = () => {
+
+const useFollow = () => {
     const context = useContext(FollowContext)
-    const { follower, pending, following, SetFollower, SetFollowing, SetPending } = context
-
-    const handleSendFollowRequest = async (id) => {
+    const { request, SetRequest } = context
+    const handleSendFollowRequest = async (following_id) => {
         try {
-            await sendFollowRequestAPI(id)
-            return { success: true}
+            const res=await sendFollowRequest(following_id)
+            console.log(res);
+            
+            SetRequest(pre=>[...pre,following_id])
+            return {
+                success: true,
+                data: res
+            }
         } catch (err) {
-            return { success: false, error: err }
+            return {
+                success: false,
+                error: err
+            }
         }
     }
 
-
     return {
-        follower, pending, following,
-        handleSendFollowRequest,
+        request, handleSendFollowRequest
     }
 }
+
+export default useFollow

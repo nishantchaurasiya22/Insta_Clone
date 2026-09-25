@@ -1,31 +1,28 @@
-import { createContext,useEffect,useState } from "react"
-import { getPendingRequestAPI } from "./services/follow.api"
+import { createContext, useEffect, useState } from "react";
+import axiosInstance from "./services/axiosIntance";
+export const FollowContext = createContext()
+export const FollowProvider = ({ children }) => {
+    const[follower,SetFollower]=useState(0)
+    const[following,SetFollowing]=useState(0)
+    const[request,SetRequest]=useState([])
 
-export const FollowContext=createContext()
-export const FollowProvider=({children})=>{
-    const[follower,SetFollower]=useState([])
-    const[following,SetFollowing]=useState([])
-    const[sendRequest,SetSendRequest]=useState(false)
-    const[pending,SetPending]=useState([]) 
-      const handleGetPendingRequest = async () => {
-        try {
-            const response = await getPendingRequestAPI()
-            SetPending(response)
-            return{
-                success:true
-            }
-        } catch (err) {
-            return{success:false,error:err}
+
+    const getPendingRequests=async()=>{
+        try{
+          const response=await axiosInstance.get("/request/pending")
+          const pendingIds=response.data.map(user=>user.user_id)
+         SetRequest(pendingIds)
+        }catch(err){
+         console.log(err);
+         
         }
     }
 
-    useEffect(() => {
-        console.log("bhej di reuest");
-        
-        handleGetPendingRequest()
-    }, [sendRequest])
-return(
-    <FollowContext.Provider value={{follower,following,pending,SetFollower,handleGetPendingRequest,SetSendRequest,SetFollowing,SetPending}}>
+    useEffect(()=>{
+        getPendingRequests()
+    },[])
+    return( 
+    <FollowContext.Provider value={{follower,following,request,SetFollower,SetFollowing,SetRequest}}>
         {children}
     </FollowContext.Provider>
-)}
+    )}

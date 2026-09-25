@@ -8,8 +8,9 @@ import ProtectedRoute from "./ProtectedRoutes"
 import Profile from "../features/profile/components/Profile"
 import CreatePost from "../features/post/components/CreatePost"
 import { PostProvider } from "../features/post/post.context"
+import { FollowProvider } from "../features/follow/follow.context"
 import Feed from "../features/post/components/Feed"
-import {FollowProvider } from "../features/follow/follow.context"
+
 
 const AppRoutes = () => {
     const router = createBrowserRouter([
@@ -35,39 +36,29 @@ const AppRoutes = () => {
                     element: <HomeLayOut />,
                     children: [
                         {
-                           
                             element:
-                            <PostProvider>
-                           <FollowProvider>
-                            <Home/>
-                           </FollowProvider>
-                            </PostProvider>
-                               
-                        
+                                <PostProvider>
+                                    <FollowProvider>
+                                        <Home />
+                                    </FollowProvider>
+                                </PostProvider>
                             ,
                             children: [
                                 {
                                     index: true,
-                                    element: <Feed/>
+                                    element: <Feed />
                                 },
                                 {
                                     path: "profile",
-                                    element:<Profile/>
+                                    element: <Profile />
                                 },
                                 {
-                                    path:"create_post",
-                                    element:<CreatePost/>
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        }
-    ])
-    return (
-        <RouterProvider router={router} />
-    )
+                                    path: "create_post",
+                                    element: <CreatePost />
+                                }]
+                        }]
+                }]
+        }])
+    return (<RouterProvider router={router} />)
 }
-
 export default AppRoutes
